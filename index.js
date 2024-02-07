@@ -14,4 +14,4 @@ app.use(express.json());
 app.use("/products", products);
 
 const port = process.env.PORT || 9001;
-app.listen(port, () => console.log(db));
+app.listen(port);
