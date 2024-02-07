@@ -2,18 +2,19 @@ const express = require("express");
 const router = express.Router();
 const admin = require("firebase-admin");
 
-router.get("/", async (req, res, next) => {
+router.get("/", (req, res, next) => {
   admin
     .firestore()
     .collection("users")
     .get()
     .then((snapshot) => {
       const response = {
-        docs: snapshot.forEach((doc) => {
-          return  doc.data;
+        docs: snapshot.docs.map((doc) => {
+          return doc.data();
         }),
       };
-      return res.status(200).json(response);
+      console.log(response);
+      res.status(200).json(response);
     })
     .catch((err) => {
       console.log(err);
